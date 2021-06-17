@@ -1,13 +1,25 @@
 package Sistema_Controle_Estoque;
 
-public class Dados_Cadastrais {
+public abstract class Dados_Cadastrais {
 	
-	private String Nome;
-	private String Cidade;
-	private String Email;
-	private String Telefone;
-	private String obs;
+	protected String Nome;
+	protected String Cidade;
+	protected String Email;
+	protected String Telefone;
+	protected String obs;
 	
+	
+	
+	public Dados_Cadastrais(String nome, String cidade, String email, String telefone, String obs)
+	{
+		
+		this.Nome = nome;
+		this.Cidade = cidade;
+		this.Email = email;
+		this.Telefone = telefone;
+		this.obs = obs;
+	}
+
 	public String getNome() 
 	{
 		return Nome;

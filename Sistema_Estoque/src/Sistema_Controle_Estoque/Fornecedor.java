@@ -5,6 +5,14 @@ public class Fornecedor
 	private String produto;
 	private String cnpj;
 	
+	
+	public Fornecedor(String produto, String cnpj)
+	{
+		super();
+		this.produto = produto;
+		this.cnpj = cnpj;
+	}
+
 	public String getProduto() 
 	{
 		return produto;

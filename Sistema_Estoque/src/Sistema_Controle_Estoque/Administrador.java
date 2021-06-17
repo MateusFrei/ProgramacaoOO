@@ -2,9 +2,19 @@ package Sistema_Controle_Estoque;
 
 public class Administrador extends Dados_Cadastrais
 {
+	
 	private String login;
 	private String senha;
 	
+	
+	
+	public Administrador(String nome, String cidade, String email, String telefone, String obs, String login,String senha)
+	{
+		super(nome, cidade, email, telefone, obs);
+		this.login = login;
+		this.senha = senha;
+	}
+
 	public String getLogin() 
 	{
 		return login;
