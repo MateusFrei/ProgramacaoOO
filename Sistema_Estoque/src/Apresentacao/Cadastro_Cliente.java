@@ -5,7 +5,6 @@ import java.awt.EventQueue;
 
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import Persistencia.Cliente_BD;
 import Persistencia.Conexao_BD;
@@ -18,14 +17,11 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
+
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
-import javax.swing.JTextArea;
 import javax.swing.JList;
 
 @SuppressWarnings("serial")
@@ -38,7 +34,6 @@ public class Cadastro_Cliente extends JFrame {
 	private JTextField textField_3;
 	private JButton btnNewButton;
 	private JTextField textField_4;
-	private JButton btnNewButton_1;
 
 	/**
 	 * Launch the application.
@@ -165,9 +160,6 @@ public class Cadastro_Cliente extends JFrame {
 			model.addElement(c.getNome() + " - " + c.getCidade()+ " - " +c.getEmail()+ " - " +c.getTelefone()+ " " +c.getCpf());
 		}
 		
-		JLabel lblNewLabel_5 = new JLabel("");
-		lblNewLabel_5.setBounds(34, 385, 126, 191);
-		getContentPane().add(lblNewLabel_5);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		
