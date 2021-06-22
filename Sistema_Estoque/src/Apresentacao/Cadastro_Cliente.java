@@ -158,7 +158,7 @@ public class Cadastro_Cliente extends JFrame {
 				{
 					for(Cliente c : lista) 
 					{
-						JList.setText(JList.getText() + c.getNome() + " - " + c.getCidade() + " - " + c.getEmail() + " - " + c.getTelefone() + " - " + c.getCpf() + "\n" );
+						list.setText(JList.list() + c.getNome() + " - " + c.getCidade() + " - " + c.getEmail() + " - " + c.getTelefone() + " - " + c.getCpf() + "\n" );
 					}
 				}
 			}
@@ -166,6 +166,7 @@ public class Cadastro_Cliente extends JFrame {
 		btnNewButton_1.setBounds(204, 323, 94, 34);
 		contentPane.add(btnNewButton_1);
 		
+		@SuppressWarnings("rawtypes")
 		JList list = new JList();
 		list.setBounds(34, 397, 838, 143);
 		contentPane.add(list);
