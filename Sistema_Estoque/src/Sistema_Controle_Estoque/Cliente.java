@@ -4,9 +4,9 @@ public class Cliente extends Dados_Cadastrais{
 	private String cpf;
 	
 
-	public Cliente(String nome, String cidade, String email, String telefone, String obs, String cpf) 
+	public Cliente(String nome, String cidade, String email, String telefone, String cpf) 
 	{
-		super(nome, cidade, email, telefone, obs);
+		super(nome, cidade, email, telefone);
 		this.cpf = cpf;
 	}
 

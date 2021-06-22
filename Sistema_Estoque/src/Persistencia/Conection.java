@@ -5,20 +5,19 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Conection {
-	
-      
-	public static void conectar_BD() throws SQLException 
-	{         
-		final String url = "jdbc:mysql://localhost:3306";         
-		final String usuario = "root";         
-		final String senha = "1234";
-		
-		Connection conexao = DriverManager.getConnection(url, usuario, senha);                  
 
-		Statement stmt = conexao.createStatement();
-		stmt.execute("CREATE DATABASE IF NOT EXISTS Sistema_Controle_Estoque");
-		
-		stmt.execute("USE Sistema_Controle_Estoque");
+	public void conectar_BD() throws SQLException 
+    {
+        final String url = "jdbc:mysql://localhost:3306";
+        final String usuario = "root";
+        final String senha = "1234";
+
+        Connection conexao = DriverManager.getConnection(url, usuario, senha);
+
+        Statement stmt = conexao.createStatement();
+        stmt.execute("CREATE DATABASE IF NOT EXISTS Sistema_Controle_Estoque");
+
+        stmt.execute("USE Sistema_Controle_Estoque");
 		
 		stmt.execute("CREATE TABLE IF NOT EXISTS Cliente(\r\n"
 				+ "	nome VARCHAR(150),\r\n"
@@ -68,8 +67,7 @@ public class Conection {
 				+ ");");
 		System.out.println("Estoque criado \n");
 		
-		conexao.close();  
-		System.out.println("Conexao encerrada...");
+		
 	}  
 	
 }

@@ -6,18 +6,16 @@ public abstract class Dados_Cadastrais {
 	protected String Cidade;
 	protected String Email;
 	protected String Telefone;
-	protected String obs;
 	
 	
 	
-	public Dados_Cadastrais(String nome, String cidade, String email, String telefone, String obs)
+	public Dados_Cadastrais(String nome, String cidade, String email, String telefone)
 	{
 		
 		this.Nome = nome;
 		this.Cidade = cidade;
 		this.Email = email;
 		this.Telefone = telefone;
-		this.obs = obs;
 	}
 
 	public String getNome() 
@@ -58,16 +56,6 @@ public abstract class Dados_Cadastrais {
 	public void setTelefone(String telefone) 
 	{
 		Telefone = telefone;
-	}
-	
-	public String getObs() 
-	{
-		return obs;
-	}
-	
-	public void setObs(String obs) 
-	{
-		this.obs = obs;
 	}
 	
 	public void novo_cadastro () 
