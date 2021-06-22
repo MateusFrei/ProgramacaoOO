@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import Persistencia.Cliente_BD;
 import Persistencia.Conexao_BD;
@@ -12,13 +13,17 @@ import Sistema_Controle_Estoque.Cliente;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 import javax.swing.JList;
@@ -54,6 +59,7 @@ public class Cadastro_Cliente extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	@SuppressWarnings({ "rawtypes", "unused", "unchecked" })
 	public Cadastro_Cliente() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 979, 623);
@@ -144,32 +150,31 @@ public class Cadastro_Cliente extends JFrame {
 		
 		btnNewButton.setBounds(89, 323, 105, 34);
 		contentPane.add(btnNewButton);
+
 		
-		btnNewButton_1 = new JButton("Listar Clientes");
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Conexao_BD conecta = new Conexao_BD();
-				
-				Cliente_BD cliente_bd = new Cliente_BD();
-				
-				ArrayList<Cliente> lista = cliente_bd.listar_Cliente();
-				
-				if(lista != null)
-				{
-					for(Cliente c : lista) 
-					{
-						list.setText(JList.list() + c.getNome() + " - " + c.getCidade() + " - " + c.getEmail() + " - " + c.getTelefone() + " - " + c.getCpf() + "\n" );
-					}
-				}
-			}
-		});
-		btnNewButton_1.setBounds(204, 323, 94, 34);
-		contentPane.add(btnNewButton_1);
+		Conexao_BD conecta = new Conexao_BD();
 		
-		@SuppressWarnings("rawtypes")
-		JList list = new JList();
-		list.setBounds(34, 397, 838, 143);
+		Cliente_BD cliente_bd = new Cliente_BD();
+		
+		DefaultListModel model = new DefaultListModel();
+		
+		ArrayList<Cliente> lista = cliente_bd.listar_Cliente();
+		
+		for (Cliente c : lista)
+		{
+			model.addElement(c.getNome() + " - " + c.getCidade()+ " - " +c.getEmail()+ " - " +c.getTelefone()+ " " +c.getCpf());
+		}
+		
+		JLabel lblNewLabel_5 = new JLabel("");
+		lblNewLabel_5.setBounds(34, 385, 126, 191);
+		getContentPane().add(lblNewLabel_5);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		
+		JList list = new JList(model);
+		list.setBounds(34, 385, 875, 191);
 		contentPane.add(list);
-		
+
+
 	}
 }

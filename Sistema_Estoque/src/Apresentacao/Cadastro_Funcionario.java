@@ -15,17 +15,18 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.sql.PreparedStatement;
 import java.awt.event.ActionEvent;
+import javax.swing.JPasswordField;
 
 public class Cadastro_Funcionario extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
-	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
 	private JTextField textField_5;
 	private JTextField textField_6;
+	private JPasswordField passwordField;
 
 	/**
 	 * Launch the application.
@@ -88,11 +89,6 @@ public class Cadastro_Funcionario extends JFrame {
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(83, 75, 216, 19);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
-		
 		textField_2 = new JTextField();
 		textField_2.setBounds(83, 109, 216, 19);
 		contentPane.add(textField_2);
@@ -120,6 +116,7 @@ public class Cadastro_Funcionario extends JFrame {
 		
 		JButton btnNewButton = new JButton("Enviar");
 		btnNewButton.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 				try 
 				{
@@ -130,7 +127,7 @@ public class Cadastro_Funcionario extends JFrame {
 					PreparedStatement stmt = con.conectar().prepareStatement(query);
 					
 					stmt.setString(1, textField.getText());
-					stmt.setString(2, textField_1.getText());
+					stmt.setString(2, passwordField.getText());
 					stmt.setString(3, textField_2.getText());
 					stmt.setString(4, textField_3.getText());
 					stmt.setString(5, textField_4.getText());
@@ -151,6 +148,9 @@ public class Cadastro_Funcionario extends JFrame {
 		});
 		btnNewButton.setBounds(42, 339, 126, 27);
 		contentPane.add(btnNewButton);
+		
+		passwordField = new JPasswordField();
+		passwordField.setBounds(83, 75, 216, 19);
+		contentPane.add(passwordField);
 	}
-
 }
