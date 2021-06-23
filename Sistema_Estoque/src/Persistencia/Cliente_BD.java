@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.util.ArrayList;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import Sistema_Controle_Estoque.Cliente;
 
@@ -76,6 +77,27 @@ public class Cliente_BD {
 			System.err.println("Erro geral"+ ex.getMessage());
 		}
 		return null;
+	}
+	
+	public void deletar_cliente(Cliente c)
+	{
+		try {
+			Conexao_BD conecta = new Conexao_BD();
+			
+			String SQL = "DELETE FROM sistema_controle_estoque.cliente WHERE nome = ?";
+			
+			PreparedStatement stmt = conecta.conectar().prepareStatement(SQL);
+			
+			stmt.setString(1, c.getNome());
+			
+			stmt.executeUpdate();
+			
+			conecta.fechar_conexao();
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
 	}
 	
 }

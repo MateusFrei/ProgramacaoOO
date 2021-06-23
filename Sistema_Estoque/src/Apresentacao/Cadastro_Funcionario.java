@@ -1,23 +1,24 @@
 package Apresentacao;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 import Persistencia.Conexao_BD;
-
+import Persistencia.Funcionario_BD;
+import Sistema_Controle_Estoque.Administrador;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.sql.PreparedStatement;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 import javax.swing.JTextArea;
 
+@SuppressWarnings("serial")
 public class Cadastro_Funcionario extends JFrame {
 
 	private JPanel contentPane;
@@ -49,9 +50,9 @@ public class Cadastro_Funcionario extends JFrame {
 	 * Create the frame.
 	 */
 	public Cadastro_Funcionario() {
-		setResizable(false);
+		setEnabled(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 600, 500);
+		setBounds(100, 100, 665, 504);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -78,7 +79,7 @@ public class Cadastro_Funcionario extends JFrame {
 		contentPane.add(lblNewLabel_4);
 		
 		JLabel lblNewLabel_5 = new JLabel("Login: ");
-		lblNewLabel_5.setBounds(28, 45, 45, 13);
+		lblNewLabel_5.setBounds(28, 27, 45, 13);
 		contentPane.add(lblNewLabel_5);
 		
 		JLabel lblNewLabel_6 = new JLabel("Senha: ");
@@ -86,7 +87,7 @@ public class Cadastro_Funcionario extends JFrame {
 		contentPane.add(lblNewLabel_6);
 		
 		textField = new JTextField();
-		textField.setBounds(83, 42, 216, 19);
+		textField.setBounds(83, 24, 216, 19);
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
@@ -123,7 +124,7 @@ public class Cadastro_Funcionario extends JFrame {
 				{
 					Conexao_BD con = new Conexao_BD();
 					
-					String query = "INSERT INTO administrador (nome, cidade, email, tel, Cpf, login, senha) VALUES (? ,? ,?, ?, ?, ?, ?)";
+					String query = "INSERT INTO administrador (nome, cidade, email, tel, login, senha) VALUES (? ,? ,?, ?, ?, ?)";
 					
 					PreparedStatement stmt = con.conectar().prepareStatement(query);
 					
@@ -132,8 +133,7 @@ public class Cadastro_Funcionario extends JFrame {
 					stmt.setString(3, textField_2.getText());
 					stmt.setString(4, textField_3.getText());
 					stmt.setString(5, textField_4.getText());
-					stmt.setString(6, textField_5.getText());
-					stmt.setString(7, textField_6.getText());
+					stmt.setString(7, textField_5.getText());
 					
 					stmt.executeUpdate();
 					stmt.close();
@@ -154,17 +154,145 @@ public class Cadastro_Funcionario extends JFrame {
 		passwordField.setBounds(83, 75, 216, 19);
 		contentPane.add(passwordField);
 		
+		JTextArea textArea = new JTextArea();
+		textArea.setBounds(28, 376, 508, 86);
+		contentPane.add(textArea);
+		
 		JButton btnNewButton_1 = new JButton("Listar Funcionario");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				try {
+					Conexao_BD conecta = new Conexao_BD();
+					
+					Funcionario_BD adm = new Funcionario_BD();
+					
+					
+					ArrayList<Administrador> lista = adm.listar_Funcionario();
+					
+					
+					if(lista != null)
+					{
+						textArea.setText("");
+						for(Administrador c : lista)
+						{
+							
+							textArea.setText(textArea.getText() + c.getNome() +" - " + c.getCidade() + " - " + c.getEmail() + " - "+ c.getTelefone() +" - "+ c.getLogin()+ "\n");
+							
+						}
+					}
+					conecta.fechar_conexao();
+				} catch (Exception e1) {
+					
+					e1.printStackTrace();
+				}
+				
 				
 			}
 		});
 		btnNewButton_1.setBounds(191, 339, 126, 27);
 		contentPane.add(btnNewButton_1);
 		
-		JTextArea textArea = new JTextArea();
-		textArea.setBounds(28, 376, 508, 86);
-		contentPane.add(textArea);
+		JButton btnNewButton_2 = new JButton("Buscar");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				try {
+					Conexao_BD conecta = new Conexao_BD();
+					
+					Funcionario_BD adm = new Funcionario_BD();
+					
+					
+					ArrayList<Administrador> lista = adm.Buscar_Adm(textField.getText());
+					
+					
+					if(lista != null)
+					{
+						textArea.setText("");
+						for(Administrador c : lista)
+						{
+							
+							textField.setText("" + c.getLogin());
+							passwordField.setText("" + c.getSenha());
+							textField_2.setText("" + c.getEmail());
+							textField_3.setText("" + c.getTelefone());
+							textField_4.setText("" + c.getNome());
+							textField_5.setText("" + c.getCidade());
+							
+							
+						}
+					}
+					conecta.fechar_conexao();
+				} catch (Exception e1) {
+					
+					e1.printStackTrace();
+				}
+				
+			}
+		});
+		btnNewButton_2.setBounds(83, 44, 85, 21);
+		contentPane.add(btnNewButton_2);
+		
+		JButton btnNewButton_2_1 = new JButton("Demitir");
+		btnNewButton_2_1.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
+			public void actionPerformed(ActionEvent e) {
+				
+				Administrador forn = new Administrador(textField.getText(), passwordField.getText(), textField_3.getText(), textField_4.getText(), textField_5.getText(), textField_6.getText());
+				
+				Funcionario_BD dao = new Funcionario_BD();
+				
+				dao.deletar_adm(forn);
+				
+			}
+		});
+		btnNewButton_2_1.setBounds(178, 44, 85, 21);
+		contentPane.add(btnNewButton_2_1);
+		
+		JButton btnNewButton_3 = new JButton("Editar info.");
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				try {
+					
+					Conexao_BD conecta = new Conexao_BD();									
+					
+					String nome = textField.getText();
+					String cidade = textField_2.getText();
+					String email = textField_3.getText(); 
+					String telefone = textField_4.getText();
+					String login = textField_5.getText();
+					
+					String querySQL = "UPDATE sistema_controle_estoque.administrador SET `cidade` = ?, `email` = ?,  `tel` = ?, `login` = ? WHERE nome = ? ";
+					
+					PreparedStatement stmt = conecta.conectar().prepareStatement(querySQL);
+					
+					stmt.setString(1, cidade);
+					stmt.setString(2, email);
+					stmt.setString(3, telefone);
+					stmt.setString(4, login);
+					stmt.setString(5, nome);
+										
+					int rowsAffected = stmt.executeUpdate();
+					System.out.println("Atualizado :"+ rowsAffected+" linha(s)");
+					
+					System.out.println("Funcionario Cadastrado com Sucesso!!!");
+					
+					//FECHA O COMANDO STMT E A CONEXÃO
+					stmt.close();
+					conecta.fechar_conexao();
+					System.out.println("Conexão Encerrada Com Sucesso!!!");
+				} catch (Exception e1) {
+					
+					e1.printStackTrace();
+				}
+				
+			}
+				
+		});
+		btnNewButton_3.setBounds(342, 342, 126, 21);
+		contentPane.add(btnNewButton_3);
+		
+
 	}
 }

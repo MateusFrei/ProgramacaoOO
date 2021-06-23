@@ -1,26 +1,14 @@
 package Sistema_Controle_Estoque;
 
-public class Fornecedor 
+public class Fornecedor extends Dados_Cadastrais
 {
-	private String produto;
 	private String cnpj;
 	
 	
-	public Fornecedor(String produto, String cnpj)
+	public Fornecedor(String nome, String cidade, String email, String telefone, String cnpj)
 	{
-		super();
-		this.produto = produto;
+		super(nome, cidade, email, telefone);
 		this.cnpj = cnpj;
-	}
-
-	public String getProduto() 
-	{
-		return produto;
-	}
-	
-	public void setProduto(String produto) 
-	{
-		this.produto = produto;
 	}
 	
 	public String getCnpj() 

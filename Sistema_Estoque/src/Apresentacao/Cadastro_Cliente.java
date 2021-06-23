@@ -13,12 +13,10 @@ import Sistema_Controle_Estoque.Cliente;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 
 import javax.swing.JTextField;
-import javax.swing.ScrollPaneConstants;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -59,14 +57,14 @@ public class Cadastro_Cliente extends JFrame {
 	@SuppressWarnings({ "rawtypes", "unused", "unchecked" })
 	public Cadastro_Cliente() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 979, 623);
+		setBounds(100, 100, 979, 420);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel_4 = new JLabel("Nome: ");
-		lblNewLabel_4.setBounds(34, 50, 45, 13);
+		lblNewLabel_4.setBounds(34, 32, 45, 13);
 		contentPane.add(lblNewLabel_4);
 		
 		JLabel lblNewLabel = new JLabel("Cidade: ");
@@ -86,7 +84,7 @@ public class Cadastro_Cliente extends JFrame {
 		contentPane.add(lblNewLabel_3);
 		
 		textField = new JTextField();
-		textField.setBounds(89, 47, 268, 19);
+		textField.setBounds(89, 29, 268, 19);
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
@@ -145,7 +143,7 @@ public class Cadastro_Cliente extends JFrame {
 		
 
 		
-		btnNewButton.setBounds(89, 296, 105, 34);
+		btnNewButton.setBounds(34, 296, 105, 34);
 		contentPane.add(btnNewButton);
 
 		
@@ -176,13 +174,13 @@ public class Cadastro_Cliente extends JFrame {
 		
 		
 		JList list = new JList(model);
-		list.setBounds(691, 78, 239, 206);
+		list.setBounds(416, 234, 539, 116);
 		contentPane.add(list);
 		
 		JTextArea textArea = new JTextArea();
 		textArea.setColumns(35);
 		textArea.setRows(30);
-		textArea.setBounds(34, 403, 720, 173);
+		textArea.setBounds(416, 65, 525, 109);
 		contentPane.add(textArea);
 		
 		
@@ -219,12 +217,8 @@ public class Cadastro_Cliente extends JFrame {
 				
 			}
 		});
-		btnNewButton_1.setBounds(204, 296, 107, 34);
+		btnNewButton_1.setBounds(619, 21, 130, 34);
 		contentPane.add(btnNewButton_1);
-		
-		JLabel lblNewLabel_5 = new JLabel("Buscas");
-		lblNewLabel_5.setBounds(691, 43, 134, 26);
-		contentPane.add(lblNewLabel_5);
 		
 		JButton btnNewButton_1_1 = new JButton("Buscar Cliente");
 		btnNewButton_1_1.addActionListener(new ActionListener() {
@@ -261,10 +255,10 @@ public class Cadastro_Cliente extends JFrame {
 				
 			}
 		});
-		btnNewButton_1_1.setBounds(701, 296, 121, 34);
+		btnNewButton_1_1.setBounds(89, 47, 112, 19);
 		contentPane.add(btnNewButton_1_1);
 		
-		JButton btnNewButton_2 = new JButton("Atualizar");
+		JButton btnNewButton_2 = new JButton("Editar Info.");
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -277,17 +271,15 @@ public class Cadastro_Cliente extends JFrame {
 					String telefone = textField_3.getText();
 					String Cpf = textField_4.getText();
 					
-					String querySQL = "UPDATE sistema_controle_estoque.cliente SET `nome` = ?, `cidade` = ?, `email` = ?,  `telefone` = ?, `cpf` = ? WHERE nome = ? ";
+					String querySQL = "UPDATE sistema_controle_estoque.cliente SET `cidade` = ?, `email` = ?,  `tel` = ?, `Cpf` = ? WHERE nome = ? ";
 					
 					PreparedStatement stmt = conecta.conectar().prepareStatement(querySQL);
 					
-					stmt.setString(1, nome);
-					stmt.setString(2, cidade);
-					stmt.setString(3, email);
-					stmt.setString(4, telefone);
-					stmt.setString(5, Cpf);
-					
-					
+					stmt.setString(1, cidade);
+					stmt.setString(2, email);
+					stmt.setString(3, telefone);
+					stmt.setString(4, Cpf);
+					stmt.setString(5, nome);
 					
 					
 					int rowsAffected = stmt.executeUpdate();
@@ -307,10 +299,10 @@ public class Cadastro_Cliente extends JFrame {
 			}
 			
 		});
-		btnNewButton_2.setBounds(321, 296, 91, 34);
+		btnNewButton_2.setBounds(149, 296, 102, 34);
 		contentPane.add(btnNewButton_2);
 		
-		JButton btnNewButton_3 = new JButton("Limpar");
+		JButton btnNewButton_3 = new JButton("Limpar Campos");
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -321,8 +313,28 @@ public class Cadastro_Cliente extends JFrame {
 				textField_4.setText("");
 			}
 		});
-		btnNewButton_3.setBounds(422, 296, 91, 34);
+		btnNewButton_3.setBounds(261, 296, 130, 34);
 		contentPane.add(btnNewButton_3);
+		
+		JButton btnNewButton_1_1_1 = new JButton("Deletar Cliente");
+		btnNewButton_1_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				
+				Cliente cli = new Cliente(textField.getText(), textField_1.getText(), textField_2.getText(), textField_3.getText(), textField_4.getText());
+				
+				Cliente_BD dao = new Cliente_BD();
+				
+				dao.deletar_cliente(cli);
+				
+			}
+		});
+		btnNewButton_1_1_1.setBounds(211, 47, 112, 19);
+		contentPane.add(btnNewButton_1_1_1);
+		
+		JLabel lblNewLabel_5 = new JLabel("Clientes Cadastrados");
+		lblNewLabel_5.setBounds(416, 199, 145, 32);
+		contentPane.add(lblNewLabel_5);
 
 
 	}

@@ -8,7 +8,7 @@ public class Administrador extends Dados_Cadastrais
 	
 	
 	
-	public Administrador(String nome, String cidade, String email, String telefone, String login,String senha)
+	public Administrador(String nome, String cidade, String email, String telefone, String login, String senha)
 	{
 		super(nome, cidade, email, telefone);
 		this.login = login;
