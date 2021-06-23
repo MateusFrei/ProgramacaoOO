@@ -160,11 +160,14 @@ public class Cadastro_Cliente extends JFrame {
 			
 			ArrayList<Cliente> lista = cliente_bd.listar_Cliente();
 			
-			for (Cliente c : lista)
+			if(lista != null)
 			{
-				model.addElement(c.getNome() + " - " + c.getCidade()+ " - " +c.getEmail()+ " - " +c.getTelefone()+ " - " +c.getCpf());
+					
+					for (Cliente c : lista)
+					{
+						model.addElement(c.getNome() + " - " + c.getCidade()+ " - " +c.getEmail()+ " - " +c.getTelefone()+ " - " +c.getCpf());
+					}					
 			}
-			
 			conecta.fechar_conexao();
 		} catch (SQLException e1) {
 			
@@ -173,7 +176,7 @@ public class Cadastro_Cliente extends JFrame {
 		
 		
 		JList list = new JList(model);
-		list.setBounds(459, 73, 481, 206);
+		list.setBounds(691, 78, 239, 206);
 		contentPane.add(list);
 		
 		JTextArea textArea = new JTextArea();
@@ -216,11 +219,11 @@ public class Cadastro_Cliente extends JFrame {
 				
 			}
 		});
-		btnNewButton_1.setBounds(236, 296, 121, 34);
+		btnNewButton_1.setBounds(204, 296, 107, 34);
 		contentPane.add(btnNewButton_1);
 		
 		JLabel lblNewLabel_5 = new JLabel("Buscas");
-		lblNewLabel_5.setBounds(459, 43, 134, 26);
+		lblNewLabel_5.setBounds(691, 43, 134, 26);
 		contentPane.add(lblNewLabel_5);
 		
 		JButton btnNewButton_1_1 = new JButton("Buscar Cliente");
@@ -258,8 +261,68 @@ public class Cadastro_Cliente extends JFrame {
 				
 			}
 		});
-		btnNewButton_1_1.setBounds(459, 303, 121, 34);
+		btnNewButton_1_1.setBounds(701, 296, 121, 34);
 		contentPane.add(btnNewButton_1_1);
+		
+		JButton btnNewButton_2 = new JButton("Atualizar");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					
+					Conexao_BD conecta = new Conexao_BD();									
+					
+					String nome = textField.getText();
+					String cidade = textField_1.getText();
+					String email = textField_2.getText(); 
+					String telefone = textField_3.getText();
+					String Cpf = textField_4.getText();
+					
+					String querySQL = "UPDATE sistema_controle_estoque.cliente SET `nome` = ?, `cidade` = ?, `email` = ?,  `telefone` = ?, `cpf` = ? WHERE nome = ? ";
+					
+					PreparedStatement stmt = conecta.conectar().prepareStatement(querySQL);
+					
+					stmt.setString(1, nome);
+					stmt.setString(2, cidade);
+					stmt.setString(3, email);
+					stmt.setString(4, telefone);
+					stmt.setString(5, Cpf);
+					
+					
+					
+					
+					int rowsAffected = stmt.executeUpdate();
+					System.out.println("Atualizado :"+ rowsAffected+" linha(s)");
+					
+					System.out.println("Cliente Cadastrado com Sucesso!!!");
+					
+					//FECHA O COMANDO STMT E A CONEXÃO
+					stmt.close();
+					conecta.fechar_conexao();
+					System.out.println("Conexão Encerrada Com Sucesso!!!");
+				} catch (Exception e1) {
+					
+					e1.printStackTrace();
+				}
+				
+			}
+			
+		});
+		btnNewButton_2.setBounds(321, 296, 91, 34);
+		contentPane.add(btnNewButton_2);
+		
+		JButton btnNewButton_3 = new JButton("Limpar");
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				textField.setText("");
+				textField_1.setText("");
+				textField_2.setText("");
+				textField_3.setText("");
+				textField_4.setText("");
+			}
+		});
+		btnNewButton_3.setBounds(422, 296, 91, 34);
+		contentPane.add(btnNewButton_3);
 
 
 	}

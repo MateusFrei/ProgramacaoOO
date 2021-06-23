@@ -29,7 +29,6 @@ public class Funcionario_BD {
 						rs.getString("cidade"),
 						rs.getString("email"),
 						rs.getString("tel"),
-						rs.getString("Cpf"),
 						rs.getString("login"),
 						rs.getString("senha"));
 				lista_admin.add(adm);
@@ -46,7 +45,7 @@ public class Funcionario_BD {
 	}
 	
 	
-	public ArrayList<Cliente> Buscar_Cliente(String nome)
+	public ArrayList<Administrador> Buscar_Cliente(String nome)
 	{
 		try {
 			
@@ -57,21 +56,22 @@ public class Funcionario_BD {
 			
 			ResultSet rs = stmt.executeQuery();
 			
-			ArrayList<Cliente> lista_cliente = new ArrayList<Cliente>();
+			ArrayList<Administrador> lista_admin = new ArrayList<Administrador>();
 			
 			while(rs.next())
 			{
-				Cliente cli = new Cliente(
+				Administrador adm = new Administrador(
 						rs.getString("nome"),
 						rs.getString("cidade"),
 						rs.getString("email"),
 						rs.getString("tel"),
-						rs.getString("Cpf"));
-				lista_cliente.add(cli);
+						rs.getString("login"),
+						rs.getString("senha"));
+				lista_admin.add(adm);
 			}
 			
 			stmt.close();
-			return lista_cliente;
+			return lista_admin;
 			
 			
 		} catch (Exception ex) {
@@ -79,6 +79,5 @@ public class Funcionario_BD {
 		}
 		return null;
 	}
-	
 
 }
