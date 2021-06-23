@@ -17,6 +17,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.sql.PreparedStatement;
 import java.awt.event.ActionEvent;
+import javax.swing.JTextArea;
 
 public class Cadastro_Fornecedor extends JFrame {
 
@@ -131,5 +132,18 @@ public class Cadastro_Fornecedor extends JFrame {
 		});
 		btnNewButton.setBounds(93, 294, 104, 34);
 		contentPane.add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("Listar Fornecedores");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		btnNewButton_1.setBounds(221, 294, 129, 34);
+		contentPane.add(btnNewButton_1);
+		
+		JTextArea textArea = new JTextArea();
+		textArea.setBounds(45, 354, 478, 99);
+		contentPane.add(textArea);
 	}
 }

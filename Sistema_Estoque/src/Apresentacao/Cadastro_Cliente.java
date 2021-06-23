@@ -4,6 +4,7 @@ package Apresentacao;
 import java.awt.EventQueue;
 
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import Persistencia.Cliente_BD;
@@ -17,12 +18,13 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 
 import javax.swing.JTextField;
-
+import javax.swing.ScrollPaneConstants;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JList;
+import javax.swing.JTextArea;
 
 @SuppressWarnings("serial")
 public class Cadastro_Cliente extends JFrame {
@@ -143,29 +145,121 @@ public class Cadastro_Cliente extends JFrame {
 		
 
 		
-		btnNewButton.setBounds(89, 323, 105, 34);
+		btnNewButton.setBounds(89, 296, 105, 34);
 		contentPane.add(btnNewButton);
 
 		
-		Conexao_BD conecta = new Conexao_BD();
+		DefaultListModel model;
+		model = new DefaultListModel();
 		
-		Cliente_BD cliente_bd = new Cliente_BD();
-		
-		DefaultListModel model = new DefaultListModel();
-		
-		ArrayList<Cliente> lista = cliente_bd.listar_Cliente();
-		
-		for (Cliente c : lista)
-		{
-			model.addElement(c.getNome() + " - " + c.getCidade()+ " - " +c.getEmail()+ " - " +c.getTelefone()+ " " +c.getCpf());
+		try {
+			Conexao_BD conecta = new Conexao_BD();
+			
+			Cliente_BD cliente_bd = new Cliente_BD();
+			
+			
+			ArrayList<Cliente> lista = cliente_bd.listar_Cliente();
+			
+			for (Cliente c : lista)
+			{
+				model.addElement(c.getNome() + " - " + c.getCidade()+ " - " +c.getEmail()+ " - " +c.getTelefone()+ " - " +c.getCpf());
+			}
+			
+			conecta.fechar_conexao();
+		} catch (SQLException e1) {
+			
+			e1.printStackTrace();
 		}
 		
 		
-		JScrollPane scrollPane = new JScrollPane();
-		
 		JList list = new JList(model);
-		list.setBounds(34, 385, 875, 191);
+		list.setBounds(459, 73, 481, 206);
 		contentPane.add(list);
+		
+		JTextArea textArea = new JTextArea();
+		textArea.setColumns(35);
+		textArea.setRows(30);
+		textArea.setBounds(34, 403, 720, 173);
+		contentPane.add(textArea);
+		
+		
+		
+		JButton btnNewButton_1 = new JButton("Listar Cadastros");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				try {
+					Conexao_BD conecta = new Conexao_BD();
+					
+					Cliente_BD cliente_bd = new Cliente_BD();
+					
+					
+					ArrayList<Cliente> lista = cliente_bd.listar_Cliente();
+					
+					
+					if(lista != null)
+					{
+						textArea.setText("");
+						for(Cliente c : lista)
+						{
+							
+							textArea.setText(textArea.getText() + c.getNome() +" - " + c.getCidade() + " - " + c.getEmail() + " - "+ c.getTelefone() +" - "+ c.getCpf()+ "\n");
+							
+						}
+					}
+					conecta.fechar_conexao();
+				} catch (Exception e1) {
+					
+					e1.printStackTrace();
+				}
+				
+				
+			}
+		});
+		btnNewButton_1.setBounds(236, 296, 121, 34);
+		contentPane.add(btnNewButton_1);
+		
+		JLabel lblNewLabel_5 = new JLabel("Buscas");
+		lblNewLabel_5.setBounds(459, 43, 134, 26);
+		contentPane.add(lblNewLabel_5);
+		
+		JButton btnNewButton_1_1 = new JButton("Buscar Cliente");
+		btnNewButton_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				try {
+					Conexao_BD conecta = new Conexao_BD();
+					
+					Cliente_BD cliente_bd = new Cliente_BD();
+					
+					
+					ArrayList<Cliente> lista = cliente_bd.Buscar_Cliente(textField.getText());
+					
+					
+					if(lista != null)
+					{
+						textArea.setText("");
+						for(Cliente c : lista)
+						{
+							
+							textField.setText("" + c.getNome());
+							textField_1.setText("" + c.getCidade());
+							textField_2.setText("" + c.getEmail());
+							textField_3.setText("" + c.getTelefone());
+							textField_4.setText("" + c.getCpf());
+							
+						}
+					}
+					conecta.fechar_conexao();
+				} catch (Exception e1) {
+					
+					e1.printStackTrace();
+				}
+				
+			}
+		});
+		btnNewButton_1_1.setBounds(459, 303, 121, 34);
+		contentPane.add(btnNewButton_1_1);
 
 
 	}

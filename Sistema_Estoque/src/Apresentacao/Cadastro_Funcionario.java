@@ -16,6 +16,7 @@ import java.awt.event.ActionListener;
 import java.sql.PreparedStatement;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
+import javax.swing.JTextArea;
 
 public class Cadastro_Funcionario extends JFrame {
 
@@ -152,5 +153,18 @@ public class Cadastro_Funcionario extends JFrame {
 		passwordField = new JPasswordField();
 		passwordField.setBounds(83, 75, 216, 19);
 		contentPane.add(passwordField);
+		
+		JButton btnNewButton_1 = new JButton("Listar Funcionario");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		btnNewButton_1.setBounds(191, 339, 126, 27);
+		contentPane.add(btnNewButton_1);
+		
+		JTextArea textArea = new JTextArea();
+		textArea.setBounds(28, 376, 508, 86);
+		contentPane.add(textArea);
 	}
 }
