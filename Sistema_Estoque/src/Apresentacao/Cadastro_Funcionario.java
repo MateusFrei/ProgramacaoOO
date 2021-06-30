@@ -251,6 +251,7 @@ public class Cadastro_Funcionario extends JFrame {
 		
 		JButton btnNewButton_3 = new JButton("Editar info.");
 		btnNewButton_3.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 				
 				try {
@@ -262,8 +263,9 @@ public class Cadastro_Funcionario extends JFrame {
 					String email = textField_3.getText(); 
 					String telefone = textField_4.getText();
 					String login = textField_5.getText();
+					String password = passwordField.getText();
 					
-					String querySQL = "UPDATE sistema_controle_estoque.administrador SET `cidade` = ?, `email` = ?,  `tel` = ?, `login` = ? WHERE nome = ? ";
+					String querySQL = "UPDATE sistema_controle_estoque.administrador SET `cidade` = ?, `email` = ?,  `tel` = ?, `login` = ?, `senha` = ? WHERE nome = ? ";
 					
 					PreparedStatement stmt = conecta.conectar().prepareStatement(querySQL);
 					
@@ -272,6 +274,7 @@ public class Cadastro_Funcionario extends JFrame {
 					stmt.setString(3, telefone);
 					stmt.setString(4, login);
 					stmt.setString(5, nome);
+					stmt.setString(6, password);
 										
 					int rowsAffected = stmt.executeUpdate();
 					System.out.println("Atualizado :"+ rowsAffected+" linha(s)");
