@@ -1,7 +1,5 @@
 package Apresentacao;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -33,18 +31,18 @@ public class Cadastro_Funcionario extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Cadastro_Funcionario frame = new Cadastro_Funcionario();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					Cadastro_Funcionario frame = new Cadastro_Funcionario();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the frame.
@@ -124,17 +122,17 @@ public class Cadastro_Funcionario extends JFrame {
 				{
 					Conexao_BD con = new Conexao_BD();
 					
-					String query = "INSERT INTO administrador (nome, cidade, email, tel, login, senha) VALUES (? ,? ,?, ?, ?, ?)";
+					String query = "INSERT INTO administrador (nome, cidade, email, tel, Cpf, login, senha) VALUES (? ,? ,?, ?, ?, ?, ?)";
 					
 					PreparedStatement stmt = con.conectar().prepareStatement(query);
 					
 					stmt.setString(1, textField.getText());
-					stmt.setString(2, passwordField.getText());
-					stmt.setString(3, textField_2.getText());
-					stmt.setString(4, textField_3.getText());
-					stmt.setString(5, textField_4.getText());
-					stmt.setString(7, textField_5.getText());
-					
+					stmt.setString(2, textField_2.getText());
+					stmt.setString(3, textField_3.getText());
+					stmt.setString(4, textField_4.getText());
+					stmt.setString(5, textField_5.getText());
+					stmt.setString(6, textField_6.getText());
+					stmt.setString(7, passwordField.getText());
 					stmt.executeUpdate();
 					stmt.close();
 					
@@ -177,7 +175,7 @@ public class Cadastro_Funcionario extends JFrame {
 						for(Administrador c : lista)
 						{
 							
-							textArea.setText(textArea.getText() + c.getNome() +" - " + c.getCidade() + " - " + c.getEmail() + " - "+ c.getTelefone() +" - "+ c.getLogin()+ "\n");
+							textArea.setText(textArea.getText() + c.getNome() +" - " + c.getCidade() + " - " + c.getEmail() + " - "+ c.getTelefone() +" - "+ c.getCpf() +" - "+ c.getLogin()+ "\n");
 							
 						}
 					}
@@ -218,6 +216,7 @@ public class Cadastro_Funcionario extends JFrame {
 							textField_3.setText("" + c.getTelefone());
 							textField_4.setText("" + c.getNome());
 							textField_5.setText("" + c.getCidade());
+							textField_6.setText("" + c.getCpf());
 							
 							
 						}
@@ -238,11 +237,11 @@ public class Cadastro_Funcionario extends JFrame {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 				
-				Administrador forn = new Administrador(textField.getText(), passwordField.getText(), textField_3.getText(), textField_4.getText(), textField_5.getText(), textField_6.getText());
+				Administrador adm = new Administrador(textField.getText(), textField_2.getText(), textField_3.getText(), textField_4.getText() , textField_5.getText(), textField_6.getText(), passwordField.getText());
 				
 				Funcionario_BD dao = new Funcionario_BD();
 				
-				dao.deletar_adm(forn);
+				dao.deletar_adm(adm);
 				
 			}
 		});
@@ -262,19 +261,21 @@ public class Cadastro_Funcionario extends JFrame {
 					String cidade = textField_2.getText();
 					String email = textField_3.getText(); 
 					String telefone = textField_4.getText();
+					String Cpf = textField_6.getText();
 					String login = textField_5.getText();
 					String password = passwordField.getText();
 					
-					String querySQL = "UPDATE sistema_controle_estoque.administrador SET `cidade` = ?, `email` = ?,  `tel` = ?, `login` = ?, `senha` = ? WHERE nome = ? ";
+					String querySQL = "UPDATE sistema_controle_estoque.administrador SET `cidade` = ?, `email` = ?,  `tel` = ?, `Cpf` = ?,`login` = ?, `senha` = ? WHERE nome = ? ";
 					
 					PreparedStatement stmt = conecta.conectar().prepareStatement(querySQL);
 					
 					stmt.setString(1, cidade);
 					stmt.setString(2, email);
 					stmt.setString(3, telefone);
-					stmt.setString(4, login);
-					stmt.setString(5, nome);
+					stmt.setString(4, Cpf);
+					stmt.setString(5, login);
 					stmt.setString(6, password);
+					stmt.setString(7, nome);
 										
 					int rowsAffected = stmt.executeUpdate();
 					System.out.println("Atualizado :"+ rowsAffected+" linha(s)");
@@ -294,8 +295,7 @@ public class Cadastro_Funcionario extends JFrame {
 				
 		});
 		btnNewButton_3.setBounds(342, 342, 126, 21);
-		contentPane.add(btnNewButton_3);
-		
+		contentPane.add(btnNewButton_3);	
 
 	}
 }

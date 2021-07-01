@@ -5,15 +5,20 @@ public class Administrador extends Dados_Cadastrais
 	
 	private String login;
 	private String senha;
+
+
+	private String Cpf;
 	
 	
 	
-	public Administrador(String nome, String cidade, String email, String telefone, String login, String senha)
+	public Administrador(String nome, String cidade, String email, String telefone, String Cpf, String login, String senha)
 	{
 		super(nome, cidade, email, telefone);
 		this.login = login;
 		this.senha = senha;
+		this.Cpf = Cpf;
 	}
+
 
 	public String getLogin() 
 	{
@@ -23,6 +28,14 @@ public class Administrador extends Dados_Cadastrais
 	public void setLogin(String login) 
 	{
 		this.login = login;
+	}
+	
+	public String getCpf() {
+		return Cpf;
+	}
+
+	public void setCpf(String cpf) {
+		Cpf = cpf;
 	}
 	
 	public String getSenha() 

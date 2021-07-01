@@ -25,7 +25,7 @@ public class Conexao_BD
     		
     		stmt.execute("USE Sistema_Controle_Estoque");
     		
-    		System.err.println("Tabela selecionada,.");
+    		System.err.println("Tabela selecionada, (isso nao e um erro!)");
     		
     	}
     	catch (Exception ex)

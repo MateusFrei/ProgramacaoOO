@@ -30,6 +30,7 @@ public class Funcionario_BD {
 						rs.getString("cidade"),
 						rs.getString("email"),
 						rs.getString("tel"),
+						rs.getString("Cpf"),
 						rs.getString("login"),
 						rs.getString("senha"));
 				lista_admin.add(adm);
@@ -66,6 +67,7 @@ public class Funcionario_BD {
 						rs.getString("cidade"),
 						rs.getString("email"),
 						rs.getString("tel"),
+						rs.getString("Cpf"),
 						rs.getString("login"),
 						rs.getString("senha"));
 				lista_admin.add(adm);
@@ -81,7 +83,7 @@ public class Funcionario_BD {
 		return null;
 	}
 	
-	public void deletar_adm(Administrador forn)
+	public void deletar_adm(Administrador adm)
 	{
 		try {
 			Conexao_BD conecta = new Conexao_BD();
@@ -90,7 +92,7 @@ public class Funcionario_BD {
 			
 			PreparedStatement stmt = conecta.conectar().prepareStatement(SQL);
 			
-			stmt.setString(1, forn.getNome());
+			stmt.setString(1, adm.getNome());
 			
 			stmt.executeUpdate();
 			
