@@ -50,7 +50,7 @@ public class Cadastro_Funcionario extends JFrame {
 	 * Create the frame.
 	 */
 	public Cadastro_Funcionario() {
-		setEnabled(false);
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 665, 504);
 		contentPane = new JPanel();
