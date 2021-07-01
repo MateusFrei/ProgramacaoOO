@@ -54,7 +54,7 @@ public class Cadastro_Cliente extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	@SuppressWarnings({ "rawtypes", "unused", "unchecked" })
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Cadastro_Cliente() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 979, 420);
