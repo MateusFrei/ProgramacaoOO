@@ -1,13 +1,27 @@
 package Sistema_Controle_Estoque;
 
-import java.util.Date;
 
 public class Vendas
 {
 	private int quantidade;
 	private double valor_total;
-	private Date data_venda;
-	
+
+	public int getQuantidade() {
+		return quantidade;
+	}
+
+	public void setQuantidade(int quantidade) {
+		this.quantidade = quantidade;
+	}
+
+	public double getValor_total() {
+		return valor_total;
+	}
+
+	public void setValor_total(double valor_total) {
+		this.valor_total = valor_total;
+	}
+
 	public void realizar_vendas()
 	{
 		
