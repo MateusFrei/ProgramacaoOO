@@ -95,9 +95,21 @@ public class Tela_Principal extends JFrame {
 		MenuBar.add(mnNewMenu_1);
 		
 		JMenuItem mntmNewMenuItem_5 = new JMenuItem("Consultar Estoque");
+		mntmNewMenuItem_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Estoque estoca = new Estoque();
+				estoca.setVisible(true);
+			}
+		});
 		mnNewMenu_1.add(mntmNewMenuItem_5);
 		
 		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Vendas");
+		mntmNewMenuItem_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Vendas vende = new Vendas();
+				vende.setVisible(true);
+			}
+		});
 		mnNewMenu_1.add(mntmNewMenuItem_3);
 		
 		JPanel panel_1 = new JPanel();
