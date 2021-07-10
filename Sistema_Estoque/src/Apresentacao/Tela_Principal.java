@@ -97,7 +97,7 @@ public class Tela_Principal extends JFrame {
 		JMenuItem mntmNewMenuItem_5 = new JMenuItem("Consultar Estoque");
 		mntmNewMenuItem_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Estoque estoca = new Estoque();
+				Tela_Estoque estoca = new Tela_Estoque();
 				estoca.setVisible(true);
 			}
 		});
@@ -106,7 +106,7 @@ public class Tela_Principal extends JFrame {
 		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Vendas");
 		mntmNewMenuItem_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Vendas vende = new Vendas();
+				Tela_Vendas vende = new Tela_Vendas();
 				vende.setVisible(true);
 			}
 		});

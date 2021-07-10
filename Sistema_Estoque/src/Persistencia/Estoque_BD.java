@@ -52,7 +52,7 @@ public class Estoque_BD {
 		try {
 			Conexao_BD conecta = new Conexao_BD();
 			
-			String SQL = "DELETE FROM sistema_controle_estoque.estoque WHERE produto = ?";
+			String SQL = "DELETE FROM sistema_controle_estoque.estoque WHERE nome_produto = ?";
 			
 			PreparedStatement stmt = conecta.conectar().prepareStatement(SQL);
 			
@@ -74,7 +74,7 @@ public class Estoque_BD {
 			
 			Conexao_BD conecta = new Conexao_BD();
 			
-			String SQL = "SELECT * FROM sistema_controle_estoque.estoque WHERE produto like '%"+produto+"%'";
+			String SQL = "SELECT * FROM sistema_controle_estoque.estoque WHERE nome_produto like '%"+produto+"%'";
 			PreparedStatement stmt = conecta.conectar().prepareStatement(SQL);
 			
 			ResultSet rs = stmt.executeQuery();
