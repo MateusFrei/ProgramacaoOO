@@ -23,11 +23,11 @@ import javax.swing.JTextArea;
 public class Cadastro_Fornecedor extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
+	private JTextField txt_cnpj;
+	private JTextField txt_tel;
+	private JTextField txt_email;
+	private JTextField txt_cidade;
+	private JTextField txt_nome;
 
 	/**
 	 * Launch the application.
@@ -76,30 +76,30 @@ public class Cadastro_Fornecedor extends JFrame {
 		lblNewLabel_4.setBounds(45, 249, 45, 13);
 		contentPane.add(lblNewLabel_4);
 		
-		textField = new JTextField();
-		textField.setBounds(93, 246, 217, 19);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		txt_cnpj = new JTextField();
+		txt_cnpj.setBounds(93, 246, 217, 19);
+		contentPane.add(txt_cnpj);
+		txt_cnpj.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(93, 203, 217, 19);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
+		txt_tel = new JTextField();
+		txt_tel.setBounds(93, 203, 217, 19);
+		contentPane.add(txt_tel);
+		txt_tel.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(93, 158, 217, 19);
-		contentPane.add(textField_2);
-		textField_2.setColumns(10);
+		txt_email = new JTextField();
+		txt_email.setBounds(93, 158, 217, 19);
+		contentPane.add(txt_email);
+		txt_email.setColumns(10);
 		
-		textField_3 = new JTextField();
-		textField_3.setBounds(93, 119, 217, 19);
-		contentPane.add(textField_3);
-		textField_3.setColumns(10);
+		txt_cidade = new JTextField();
+		txt_cidade.setBounds(93, 119, 217, 19);
+		contentPane.add(txt_cidade);
+		txt_cidade.setColumns(10);
 		
-		textField_4 = new JTextField();
-		textField_4.setBounds(93, 61, 217, 19);
-		contentPane.add(textField_4);
-		textField_4.setColumns(10);
+		txt_nome = new JTextField();
+		txt_nome.setBounds(93, 61, 217, 19);
+		contentPane.add(txt_nome);
+		txt_nome.setColumns(10);
 		
 		JButton btnNewButton = new JButton("Enviar");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -112,15 +112,16 @@ public class Cadastro_Fornecedor extends JFrame {
 					
 					PreparedStatement stmt = con.conectar().prepareStatement(query);
 					
-					stmt.setString(1, textField.getText());
-					stmt.setString(2, textField_1.getText());
-					stmt.setString(3, textField_2.getText());
-					stmt.setString(4, textField_3.getText());
-					stmt.setString(5, textField_4.getText());
+					stmt.setString(5, txt_cnpj.getText());
+					stmt.setString(4, txt_tel.getText());
+					stmt.setString(3, txt_email.getText());
+					stmt.setString(2, txt_cidade.getText());
+					stmt.setString(1, txt_nome.getText());
 					
 					stmt.executeUpdate();
 					stmt.close();
 					
+					con.fechar_conexao();
 					System.out.println("Dados do fornecedor preenchidos.");
 					System.out.println("Conection closed...");
 					
@@ -179,7 +180,7 @@ public class Cadastro_Fornecedor extends JFrame {
 					Fornecedor_BD dao = new Fornecedor_BD();
 					
 					
-					ArrayList<Fornecedor> lista = dao.Buscar_Fornecedor(textField.getText());
+					ArrayList<Fornecedor> lista = dao.Buscar_Fornecedor(txt_nome.getText());
 					
 					
 					if(lista != null)
@@ -188,11 +189,11 @@ public class Cadastro_Fornecedor extends JFrame {
 						for(Fornecedor c : lista)
 						{
 							
-							textField.setText("" + c.getNome());
-							textField_1.setText("" + c.getCidade());
-							textField_2.setText("" + c.getEmail());
-							textField_3.setText("" + c.getTelefone());
-							textField_4.setText("" + c.getCnpj());
+							txt_nome.setText("" + c.getNome());
+							txt_cidade.setText("" + c.getCidade());
+							txt_email.setText("" + c.getEmail());
+							txt_tel.setText("" + c.getTelefone());
+							txt_cnpj.setText("" + c.getCnpj());
 							
 						}
 					}
@@ -210,7 +211,7 @@ public class Cadastro_Fornecedor extends JFrame {
 		btnNewButton_2_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				Fornecedor forn = new Fornecedor(textField.getText(), textField_1.getText(), textField_2.getText(), textField_3.getText(), textField_4.getText());
+				Fornecedor forn = new Fornecedor(txt_nome.getText(),txt_cidade.getText() , txt_email.getText(),txt_tel.getText(), txt_cnpj.getText());
 				
 				Fornecedor_BD dao = new Fornecedor_BD();
 				
@@ -229,11 +230,11 @@ public class Cadastro_Fornecedor extends JFrame {
 					
 					Conexao_BD conecta = new Conexao_BD();									
 					
-					String nome = textField.getText();
-					String cidade = textField_1.getText();
-					String email = textField_2.getText(); 
-					String telefone = textField_3.getText();
-					String Cnpj = textField_4.getText();
+					String nome = txt_nome.getText();
+					String cidade = txt_cidade.getText();
+					String email = txt_email.getText(); 
+					String telefone = txt_tel.getText();
+					String Cnpj = txt_cnpj.getText();
 					
 					String querySQL = "UPDATE sistema_controle_estoque.fornecedor SET `cidade` = ?, `email` = ?,  `tel` = ?, `Cnpj` = ? WHERE nome = ? ";
 					
@@ -244,14 +245,12 @@ public class Cadastro_Fornecedor extends JFrame {
 					stmt.setString(3, telefone);
 					stmt.setString(4, Cnpj);
 					stmt.setString(5, nome);
-					
-					
-					int rowsAffected = stmt.executeUpdate();
-					System.out.println("Atualizado :"+ rowsAffected+" linha(s)");
-					
+										
+					stmt.executeUpdate();
+									
 					System.out.println("Cliente Cadastrado com Sucesso!!!");
 					
-					//FECHA O COMANDO STMT E A CONEXÃO
+				
 					stmt.close();
 					conecta.fechar_conexao();
 					System.out.println("Conexão Encerrada Com Sucesso!!!");
