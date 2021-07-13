@@ -139,7 +139,7 @@ public class Cadastro_Fornecedor extends JFrame {
 		textArea.setBounds(45, 364, 517, 88);
 		contentPane.add(textArea);
 		
-		JButton btnNewButton_1 = new JButton("Listar Fornecedores");
+		JButton btnNewButton_1 = new JButton("Relatorio Fornecedores");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -168,7 +168,7 @@ public class Cadastro_Fornecedor extends JFrame {
 				}
 			}
 		});
-		btnNewButton_1.setBounds(159, 294, 129, 34);
+		btnNewButton_1.setBounds(159, 294, 151, 34);
 		contentPane.add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("Buscar Fornecedor");
@@ -262,7 +262,7 @@ public class Cadastro_Fornecedor extends JFrame {
 			}
 				
 		});
-		btnEditarInfo.setBounds(299, 294, 104, 34);
+		btnEditarInfo.setBounds(322, 294, 104, 34);
 		contentPane.add(btnEditarInfo);
 		
 	}

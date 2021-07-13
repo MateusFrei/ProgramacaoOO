@@ -158,7 +158,7 @@ public class Cadastro_Funcionario extends JFrame {
 		textArea.setBounds(28, 376, 508, 86);
 		contentPane.add(textArea);
 		
-		JButton btnNewButton_1 = new JButton("Listar Funcionario");
+		JButton btnNewButton_1 = new JButton("Relatorio Funcionario");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -190,7 +190,7 @@ public class Cadastro_Funcionario extends JFrame {
 				
 			}
 		});
-		btnNewButton_1.setBounds(191, 339, 126, 27);
+		btnNewButton_1.setBounds(178, 339, 154, 27);
 		contentPane.add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("Buscar");
@@ -296,7 +296,7 @@ public class Cadastro_Funcionario extends JFrame {
 			}
 				
 		});
-		btnNewButton_3.setBounds(342, 342, 126, 21);
+		btnNewButton_3.setBounds(342, 339, 126, 27);
 		contentPane.add(btnNewButton_3);	
 
 	}

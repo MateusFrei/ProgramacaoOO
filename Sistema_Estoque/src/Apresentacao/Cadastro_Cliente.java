@@ -185,7 +185,7 @@ public class Cadastro_Cliente extends JFrame {
 		
 		
 		
-		JButton btnNewButton_1 = new JButton("Listar Cadastros");
+		JButton btnNewButton_1 = new JButton("Rel\u00E1torio de Clientes");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -217,7 +217,7 @@ public class Cadastro_Cliente extends JFrame {
 				
 			}
 		});
-		btnNewButton_1.setBounds(619, 21, 130, 34);
+		btnNewButton_1.setBounds(604, 21, 145, 34);
 		contentPane.add(btnNewButton_1);
 		
 		JButton btnNewButton_1_1 = new JButton("Buscar Cliente");
@@ -313,7 +313,7 @@ public class Cadastro_Cliente extends JFrame {
 				textField_4.setText("");
 			}
 		});
-		btnNewButton_3.setBounds(261, 296, 130, 34);
+		btnNewButton_3.setBounds(261, 296, 145, 34);
 		contentPane.add(btnNewButton_3);
 		
 		JButton btnNewButton_1_1_1 = new JButton("Deletar Cliente");
